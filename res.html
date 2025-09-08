@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- Hidden iframe for resume -->
+    <iframe id="contenth" src="resume.html" style="display:none;"></iframe>
+
+    <!-- Button to print manually -->
+    <button id="printBtn">📄 Print / Download PDF</button>
+
+<script>
+// Function to print the resume
+function printResume() {
+    const iframe = document.getElementById("contenth");
+    if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.focus();
+        iframe.contentWindow.print();
+    } else {
+        window.print(); // fallback
+    }
+}
+
+// Auto-print on page load
+window.onload = function () {
+    const iframe = document.getElementById("contenth");
+    if (iframe) {
+        iframe.onload = function () {
+            printResume();
+        };
+    } else {
+        printResume();
+    }
+};
+
+// Button click triggers print
+document.getElementById("printBtn").addEventListener("click", printResume);
+</script>
+
+</body>
+</html>
